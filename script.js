@@ -48,9 +48,14 @@ async function fetchData(){
         catch(error){
             console.error(error);
         }
-}
 
-async function rateBook(){
     
 }
 
+
+function rateBook(){
+        const display = document.getElementById("display");
+        let opinion = document.getElementById("opinion").value;
+
+        display.textContent = opinion;
+}
