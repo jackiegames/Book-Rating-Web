@@ -8,8 +8,12 @@
 </head>
 <body>
     <h1 id="logo">Book Worms</h1>
-    <input class="rating-box" type="text" placeholder="Your opinion on the book">
-    <button>Submit</button>
+    <div id="opinion-box">
+        <input id="opinion" type="text" placeholder="Your opinion on the book">
+        <button id="submit-rate" onclick="rateBook()">Submit</button>
+        <h2 id="display"></h2>
+</div>
+    
 
     <link rel="stylesheet" href="style.css">
     <script src="script.js"></script>
