@@ -59,3 +59,36 @@ function rateBook(){
 
         display.textContent = opinion;
 }
+
+fetchData();
+async function fetchData(){
+    try{
+        const h1Element = document.getElementById("info");
+        const description = document.getElementById("synopsis");
+        const title = document.getElementById("input").value;
+        const rate = document.getElementById("rate");
+
+
+        const response = await fetch(`https://openlibrary.org/search.json?q=${title}&fields=description`);
+        
+        if(!response.ok){
+            throw new Error("Could not fetch resource");
+        }
+        const data = await response.json();
+        const book = data.docs[0];
+        h1Element.textContent = book.author_name;
+        description.textContent = book.description;
+
+        const image = `https://covers.openlibrary.org/b/id/${book.cover_i}-M.jpg`;
+        
+    }
+        catch(error){
+            console.error(error);
+        }
+    return(
+        <div>
+            <img src={image}></img>
+            <p>Description: {book.description}</p>
+        </div>
+    );
+    
