@@ -1,0 +1,113 @@
+.books-container{
+ 
+  gap:20px;
+  padding:20px;
+  justify-content:center;
+  margin:0 auto;
+}
+.card{
+  width: 300px;
+  height:300px;
+
+  border: 1px solid black;
+  border-radius: 5px;
+  box-shadow: 2px 3px 10px;
+  text-align:center;
+  
+  padding:5px;
+  margin:5px;
+  display: inline-flex;
+  flex-direction: column;
+  align-items:center;
+  overflow:hidden;
+}
+
+.card .card-image{
+  max-width:60%;
+  height: 150px;
+  border-radius:10%;
+}
+
+.card .card-title{
+  font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  margin: 0;
+  font-size:15px;
+  line-height:2;
+}
+
+.card .card-text{
+  font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-size:9px;
+
+  
+}
+
+.search{
+    float: right; /*have the search bar on the right always */
+    --padding: 12px; /*making padding a variable */
+    
+    width: max-content;
+    display: flex;
+    align-items: center;
+    padding: var(--padding);
+    border-radius: 24px;
+    background: rgb(32, 32, 34);
+    transition: background 0.25s; /*how long it takes for the background to change */
+    transition: box-shadow 0.25s;
+}
+.search-input {
+    font-size: 16px;
+    font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    color:rgb(35, 212, 115); /*for the line when typing in the search bar */
+    margin-left: var(--padding);
+    outline: none;
+    border: none;
+    background:transparent;
+    width: 200px;
+}
+
+.search:focus-within{
+    background: rgb(215, 213, 214); /*whenever something within search is focused on, then change the background color of the search bar */
+    box-shadow: 0 0 5px rgb(0,0,0);
+}
+
+.search-input::placeholder,
+.search-icon {
+    color:rgb(13, 13, 13); /*sets the color of the placeholder word, in the search bar. The ".search-icon also makes sure to change the colour of the icon as well so they always match*/
+}
+
+
+body{
+    font-size:25px;
+    background-image: url('https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/40f17345-dc89-46cf-bf75-d7969bc88cc8/d5h142m-41766262-4bf7-4f16-b226-c7cebaffca7e.jpg/v1/fill/w_900,h_675,q_75,strp/02_by_issa02_d5h142m-fullview.jpg?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7ImhlaWdodCI6Ijw9Njc1IiwicGF0aCI6IlwvZlwvNDBmMTczNDUtZGM4OS00NmNmLWJmNzUtZDc5NjliYzg4Y2M4XC9kNWgxNDJtLTQxNzY2MjYyLTRiZjctNGYxNi1iMjI2LWM3Y2ViYWZmY2E3ZS5qcGciLCJ3aWR0aCI6Ijw9OTAwIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmltYWdlLm9wZXJhdGlvbnMiXX0.bZKKDDD8LO1uduxCCo_PwE-8hG-8gwJZ69zpVcnH6UQ');
+    background-repeat:no-repeat;
+    background-size:cover;
+    background-attachment: fixed; /*so the background covers any page size */
+    color:rgb(245, 218, 183);
+    overflow:scroll;
+    height: 100%;
+    align-items:center;
+
+}
+#submit, #rate, #submit-rate{
+    font-size:25px;
+    background-color:rgb(117, 124, 124);
+    padding:5px 10px;
+    margin:5px;
+    border-radius:4px;
+}
+
+#container{
+    display:flex;
+    justify-content: space-between; /* put the logo and search bar on opposite sides */
+}
+
+#logo{
+    color:rgb(235, 226, 186);
+    margin: 0px;
+}
+
+
+html{
+    scroll-behavior:smooth;
+}
