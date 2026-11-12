@@ -1,39 +1,44 @@
+# Dependencies
+node_modules/
+
+
+# Environment variables and secrets
+
+.env
+.env.*
+*.env
+!.env.example
+
+# Build files
+
+dist/
+build/
+
+
 # Logs
-logs
+
 *.log
 npm-debug.log*
 yarn-debug.log*
-yarn-error.log*
 pnpm-debug.log*
-lerna-debug.log*
 
-node_modules
+# Operating system files
+
 .DS_Store
-dist
-dist-ssr
-coverage
-*.local
+Thumbs.db
+desktop.ini
 
-# Editor directories and files
+# VS Code
+
 .vscode/*
 !.vscode/extensions.json
-.idea
-*.suo
-*.ntvs*
-*.njsproj
-*.sln
-*.sw?
 
-*.tsbuildinfo
+# Temporary files
 
-.eslintcache
+*.tmp
+*.temp
+.cache/
 
-# Cypress
-/cypress/videos/
-/cypress/screenshots/
+# Testing
 
-# Vitest
-__screenshots__/
-
-# Vite
-*.timestamp-*-*.mjs
+coverage/
