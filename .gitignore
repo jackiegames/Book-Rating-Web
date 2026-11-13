@@ -42,3 +42,8 @@ desktop.ini
 # Testing
 
 coverage/
+
+#Post code
+backend/src/controllers/post.controller.js
+backend/src/models/posts.model.js
+backend/src/routes/post.route.js
