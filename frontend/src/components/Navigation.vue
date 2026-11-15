@@ -54,20 +54,9 @@ import { ref } from 'vue';
                 <!-- <img src="/src/assets/book-logo.avif" class="book-logo"> -->
                 <h3 id="logo">On the Shelf</h3>
                 <li>
-                 <RouterLink to="/Dashboard" class="">Dashboard</RouterLink>
+                 <RouterLink to="/UserAccount" class="">User</RouterLink>
                 </li>
 
-                <li>
-                    <RouterLink to="/Practice" class="">Practice</RouterLink>
-                </li>
-                
-                <li>
-                    <RouterLink to="/Results" class="">Results</RouterLink>
-                </li>
-
-                <li>
-                    <RouterLink to="/MissedTests" class="">Missed Tests</RouterLink>
-                </li>
                 <form @submit.prevent="fetchData">
                 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&icon_names=search" />
                 <div class="search">
@@ -114,7 +103,7 @@ nav ul{
 
 }
 nav a{
-    color:rgb(0, 0, 0);
+    color: var(--color);
     text-decoration:none;
     padding:15px;
     display: block;
@@ -122,7 +111,7 @@ nav a{
 }
 
 nav a:hover{
-    color:rgb(158, 158, 153);
+    color: var(--headerColor);
     
 }
 li{
@@ -172,5 +161,8 @@ li{
 .book-logo{
     width:50px;
     height:50px;
+}
+.navigation-bar{
+    background-color: var(--background-color);
 }
 </style>
