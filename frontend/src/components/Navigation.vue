@@ -51,7 +51,10 @@ import { ref } from 'vue';
 
         <div class="brand">
             <img src="/src/assets/book-logo.svg" class="book-logo" alt="Book logo">
-            <h3 class="brand-name">On the Shelf</h3>
+            <RouterLink to="/Dashboard" class="dashboard-link">
+                <h3 class="brand-name">On the Shelf</h3>
+            </RouterLink>
+            
         </div>
 
         <div class="nav-right">
@@ -131,6 +134,9 @@ import { ref } from 'vue';
     font-size: 24px;
     color: var(--header-color);
 }
+.brand-name:hover {
+   color: var(--text-color);
+}
 
 /* User link and search bar on the right */
 .nav-right {
@@ -181,4 +187,9 @@ import { ref } from 'vue';
 .search-icon {
     color: var(--background-color);
 }
+
+.dashboard-link{
+    text-decoration: none;
+}
+
 </style>

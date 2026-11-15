@@ -1,5 +1,47 @@
 <script setup>
     
+    import { ref } from "vue";
+    import axios from "axios";
+    import { useRouter } from 'vue-router';
+
+    const username = ref("");
+    const email = ref("");
+    const password = ref("");
+
+    const message = ref("");
+    const error = ref("");
+
+    const loginUser = async () =>{
+        message.value = "";
+        error.value = "";
+
+        try{
+            const response = await axios.post("http://localhost:4000/api/v1/users/login",
+            {
+                email: email.value,
+                password: password.value
+            });
+
+            message.value = response.data.message;
+
+            localStorage.setItem("user", 
+            JSON.stringify(response.data.user));
+
+        } catch (err){
+            error.value = err.response?.data?.message || "Something went wrong with your registration";
+            throw err;
+        }
+    }
+    const router = useRouter();
+    const findUser = async () =>{
+        try{
+            await loginUser();
+            router.push('/UserAccount');
+        } catch (error){
+            console.error('Account could not be found:', error);
+        }
+    }
+
 </script>
 
 <template>
@@ -20,34 +62,38 @@
                 <p class="subtitle">Sign in to see your old reads!</p>
                 <p class="description">For book worms and authors alike.</p>
 
-                <form>
+                <form @submit.prevent="findUser">
                     <div class="mb-3">
                         <label for="email" class="form-label">Email:</label>
                         <input
+                            v-model="email"
                             type="email"
                             id="email"
                             name="email"
                             class="form-control"
                             placeholder="Enter your email"
+                            required
                         >
                     </div>
 
                     <div class="mb-3">
                         <label for="pass" class="form-label">Password:</label>
                         <input
+                            v-model="password"
                             type="password"
                             id="pass"
                             name="pass"
                             class="form-control"
                             placeholder="Enter your password"
+                            required
                         >
                     </div>
 
                     <div class="login-actions">
 
-                        <RouterLink to="/Dashboard" class="login-btn">
-                            Log In
-                        </RouterLink>
+                        <button type ="submit" class="login-btn"> Log In</button>
+                        <p v-if="message" class=success> {{ message }} </p>
+                            <p v-if="error" class=error> {{ error }} </p>
 
                         <a href="#" class="forgot-link">
                             Forgot Password?
@@ -179,7 +225,7 @@
     .login-btn:hover {
         transition: 0.5s ease;
         background-color: var(--button-color-ease);
-        color: #FFFFFF;
+        color: var(--card-color);
     }
 
 
