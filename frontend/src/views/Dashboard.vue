@@ -9,22 +9,21 @@ import Books from '../components/Books.vue'
     </header>
     <main>
         <Navigation />
-        <h1>Dashboard</h1>
-        <Books />
-        <nav>
-            <ul>
-                <li>
-                 <RouterLink to="/" class="">Log Out</RouterLink>
-                </li>
-            </ul>
-        </nav>
-        
+        <h1 style="color: var(--headerColor)">All Books</h1>
+        <Books />        
     </main>
 
 </template>
 
 <style scoped>
     h1{
+        background-color: var(--background-color);
         margin:10px;
     }
+
+    @media (max-width: 600px){
+    h1{
+        font-size:28px;
+    }
+}
 </style>

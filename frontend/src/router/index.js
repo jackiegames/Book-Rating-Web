@@ -2,9 +2,9 @@ import { createRouter, createWebHistory } from 'vue-router'
 
 import LoginPage from '../views/LoginPage.vue'
 import Dashboard from '../views/Dashboard.vue'
-import Practice from '../views/Practice.vue'
 import CreateAccount from '../views/CreateAccount.vue'
-import Results from '../views/Results.vue'
+import UserAccount from '../views/UserAccount.vue'
+
 
 
 const routes = [
@@ -13,16 +13,11 @@ const routes = [
         name: 'Login',
         component: LoginPage
     },
+
     {
         path: '/Dashboard',
         name: 'Dashboard',
         component: Dashboard
-    },
-
-    {
-        path: '/Practice',
-        name: 'Practice',
-        component: Practice
     },
 
     {
@@ -32,9 +27,9 @@ const routes = [
     },
 
     {
-        path: '/Results',
-        name: 'Results',
-        component: Results
+        path: '/UserAccount',
+        name: 'UserAccount',
+        component: UserAccount
     }
 ]
 
