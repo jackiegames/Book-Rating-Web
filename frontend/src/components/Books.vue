@@ -62,6 +62,7 @@ const loading = ref(true)
 </template>
 
 <style scoped>
+
 .card-image{
     width:200px;
     height:220px;
@@ -72,15 +73,11 @@ const loading = ref(true)
     color: var(--headerColor);
 }
 
-.card-text{
-    width:250px;
-}
-
 .card-button{
     border-radius: 10px;
-    border: 2px solid var(--headerColor);
-    color: var(--color);
-    background-color: var(--background-color);
+    border: 0px;
+    color: var(--card-color);
+    background-color: var(--button-color);
     margin: 15px auto 0;
     display: block;
     width:200px;
@@ -90,12 +87,11 @@ const loading = ref(true)
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
     gap: 35px;
-    /* max-width: 1200px; */
     margin: auto;
 }
 
 .card{
-    background-color: white;
+    background-color: var(--card-color);
     border-radius:15px;
     padding: 20px;
     box-shadow: 0px 1px 5px rgb(121, 121, 130);
@@ -130,6 +126,7 @@ const loading = ref(true)
     -webkit-line-clamp: 3;
     -webkit-box-orient: vertical;
     overflow: hidden;
+    color: var(--text-color);
 }
 
 @media (max-width: 600px){

@@ -23,6 +23,12 @@ import Books from '../components/Books.vue'
 </template>
 
 <style scoped>
+
+    main {
+        background-color: #F5F0E6;
+        min-height: 100vh;
+    }  
+     
     h1{
         background-color: var(--background-color);
         margin:10px;

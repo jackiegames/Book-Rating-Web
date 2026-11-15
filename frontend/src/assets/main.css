@@ -1,7 +1,23 @@
 :root{
-  --color:rgb(54, 206, 155); /* small header color */
-  --headerColor: rgb(21, 83, 62);
-  /* --background-color: rgb(247, 242, 236); */
-  --background-color: white;
+  --color:#49392F;
+  --header-color: #49392F;
+  --background-color: #F5F0E6;
 
+  --card-color: #FFFFFF;
+  --button-color: #657765;
+
+  --text-color: #806F60;
+  --button-color-ease: #A3B49F;
+
+}
+
+#app {
+  margin: 0;
+  min-height: 100%;
+  background-color: #F5F0E6;
+}
+
+.app-container {
+  min-height: 100vh;
+  background-color: #F5F0E6;
 }
