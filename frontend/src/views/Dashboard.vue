@@ -9,13 +9,19 @@ import Books from '../components/Books.vue'
     </header>
     <main>
         <Navigation />
-        <h1 style="color: var(--headerColor)">All Books</h1>
+        <h1 style="color: var(--header-color)">All Books</h1>
         <Books />        
     </main>
 
 </template>
 
 <style scoped>
+
+    main {
+        background-color: #F5F0E6;
+        min-height: 100vh;
+    }
+    
     h1{
         background-color: var(--background-color);
         margin:10px;

@@ -47,122 +47,138 @@ import { ref } from 'vue';
 </script>
 
 <template>
-    <div class="navigation-bar">
-    
-        <nav class="nav-bar">
-            <ul>
-                <!-- <img src="/src/assets/book-logo.avif" class="book-logo"> -->
-                <h3 id="logo">On the Shelf</h3>
-                <li>
-                 <RouterLink to="/UserAccount" class="">User</RouterLink>
-                </li>
+    <nav class="nav-bar">
 
-                <form @submit.prevent="fetchData">
-                <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&icon_names=search" />
-                <div class="search">
-                <span class="search-icon material-symbols-outlined">search</span>
-                <input v-model="searchTitle" class="search-input" type="search" id="input" placeholder="new read!"/>
-            
+        <div class="brand">
+            <img src="/src/assets/book-logo.svg" class="book-logo" alt="Book logo">
+            <h3 class="brand-name">On the Shelf</h3>
+        </div>
+
+        <div class="nav-right">
+
+            <RouterLink to="/UserAccount" class="links">
+                User
+            </RouterLink>
+
+            <form @submit.prevent="fetchData">
+                <div class="search-container">
+                    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&icon_names=search" />
+
+                    <span class="search-icon material-symbols-outlined">search</span>
+
+                    <input v-model="searchTitle"
+                        class="search-input"
+                        type="search"
+                        id="input"
+                        placeholder="new read!"/>
                 </div>
             </form>
-            </ul>
-        </nav>
-        <div id="container">
-            <p v-if="loading">Searching</p>
-                <div v-if="!loading && book" class="search-result">
-                    
-                    <div :key="book.key">
-                    <img v-if="book.cover_i" class="search-image"
-                        :src="`https://covers.openlibrary.org/b/id/${book.cover_i}-M.jpg`"
-                                :alt="book.title"/>
-                    <h2 >Title: {{book.title}}</h2>
 
+        </div>
 
-                    <p >Author: {{book.author_name}}</p>
+    </nav>
 
+    <div id="container">
+        <p v-if="loading">Searching</p>
 
-                    <p>Publish year: {{book.first_publish_year || "Unknown"}}</p>
+        <div v-if="!loading && book" class="search-result">
+            <div :key="book.key">
+                <img
+                    v-if="book.cover_i"
+                    class="search-image"
+                    :src="`https://covers.openlibrary.org/b/id/${book.cover_i}-M.jpg`"
+                    :alt="book.title"
+                />
 
-                    <p >Description: {{book.description || "Unknown"}}</p>
-                    </div>
-
-                </div>
-                <p v-if="props.hasSearched && !loading && !book">No book found</p>
+                <h2>Title: {{ book.title }}</h2>
+                <p>Author: {{ book.author_name }}</p>
+                <p>Publish year: {{ book.first_publish_year || "Unknown" }}</p>
+                <p>Description: {{ book.description || "Unknown" }}</p>
             </div>
         </div>
+
+        <p v-if="props.hasSearched && !loading && !book">
+            No book found
+        </p>
+    </div>
 </template>
 
 <style scoped>
-nav ul{
-    /* background-color: rgb(159, 159, 176); */
-    list-style-type: none;
-    padding:0px;
-    margin:0px;
-    overflow:hidden;
-    display:flex;
-
-}
-nav a{
-    color: var(--color);
-    text-decoration:none;
-    padding:15px;
-    display: block;
-
+.nav-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    padding: 5px;
+    box-sizing: border-box;
 }
 
-nav a:hover{
-    color: var(--headerColor);
-    
+/* Logo and website name */
+.brand {
+    display: flex;
+    align-items: center;
+    gap: 12px;
 }
-li{
-    float:left;
+
+.book-logo {
+    width: 50px;
+    height: 50px;
+    object-fit: contain;
+}
+
+.brand-name {
+    margin: 0;
+    font-size: 24px;
+    color: var(--header-color);
+}
+
+/* User link and search bar on the right */
+.nav-right {
+    display: flex;
+    align-items: center;
+    gap: 25px;
+}
+
+.links {
+    color: var(--button-color);
+    text-decoration: none;
     font-weight: bold;
 }
 
-#logo{
-    margin-right:auto;
+.links:hover {
+    color: #A3B49F;
 }
 
-.search{
-    float: right; /*have the search bar on the right always */
-    --padding: 12px; /*making padding a variable */
-    
-   
+/* Search bar */
+.search-container {
     display: flex;
     align-items: center;
-    padding: var(--padding);
-    border-radius: 10px;
-    background-color: aliceblue;
-    transition: background 0.25s; /*how long it takes for the background to change */
-    transition: box-shadow 0.25s;
-}
-.search-input {
-    font-size: 16px;
-    font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
-    color:rgb(0, 0, 0); /*for the line when typing in the search bar */
-    margin-left: var(--padding);
-    outline: none;
-    border: none;
-    background:transparent;
-    /* width: 200px; */
+    gap: 10px;
+    padding: 10px 15px;
+    border-radius: 20px;
+    background-color: var(--button-color);
 }
 
-.search-image{
+.search-container:hover{
+    transition: 1s ease;
+    background-color: var(--button-color-ease);
+}
+
+.search-input {
+    font-size: 16px;
+    font-family: 'Trebuchet MS', sans-serif;
+    color: var(--card-color);
+    outline: none;
+    border: none;
+    background: transparent;
     width: 200px;
-    height: 280px;
-    
-    border-radius: 10px;
-    display: block;
-    margin: 20px auto;
 }
-.search-result{
-    align-items:center;
+
+.search-input::placeholder{
+    color: var(--card-color);
 }
-.book-logo{
-    width:50px;
-    height:50px;
-}
-.navigation-bar{
-    background-color: var(--background-color);
+
+.search-icon {
+    color: var(--background-color);
 }
 </style>
