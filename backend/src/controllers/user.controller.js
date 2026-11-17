@@ -1,4 +1,5 @@
 import { User } from "../models/user.model.js"
+import jwt from 'jsonwebtoken';
 
 const registerUser = async (req, res) =>{
     try{
@@ -47,8 +48,13 @@ const loginUser = async (req, res) => {
         // checking if the user already exists
         const { email, password } = req.body;
 
+        if(!email || !password){
+            return res.status(400).json({
+                message: "Email and password are required!"
+            });
+        }
         const user = await User.findOne({
-            email: email.toLowerCase(),
+            email: email.trim().toLowerCase()
         });
 
         // if the user doesn't exist
@@ -60,7 +66,15 @@ const loginUser = async (req, res) => {
         const isMatch = await user.comparePassword(password);
         if(!isMatch) return res.status(400).json({
             message: "Invalid credentials"
-        })
+        });
+
+        const token = jwt.sign(
+            { id: user._id.toString() },
+            process.env.JWT_SECRET,
+            {
+                expiresIn: process.env.JWT_EXPIRES_IN || '1d'
+            }
+        );
 
         res.status(200).json({
             message: "Successfully logged in",
@@ -68,8 +82,9 @@ const loginUser = async (req, res) => {
                 id: user._id,
                 email: user.email,
                 username: user.username
-            }
-        })
+            }, token
+        });
+
     } catch (error){
         res.status(500).json({
             message: "Internal Server Error"
