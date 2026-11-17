@@ -97,7 +97,7 @@
                             <p v-if="error" class=error> {{ error }} </p>
                             <p class="login-text">
                             Have an account already?
-                            <RouterLink to="/" class="login-link">
+                            <RouterLink to="/LoginPage" class="login-link">
                                 Log In
                             </RouterLink>
                         </p>

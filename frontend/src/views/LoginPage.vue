@@ -4,7 +4,6 @@
     import axios from "axios";
     import { useRouter } from 'vue-router';
 
-    const username = ref("");
     const email = ref("");
     const password = ref("");
 
@@ -24,11 +23,13 @@
 
             message.value = response.data.message;
 
-            localStorage.setItem("user", 
+            localStorage.setItem('user', 
             JSON.stringify(response.data.user));
-
+        
+            localStorage.setItem('token', response.data.token);
+            
         } catch (err){
-            error.value = err.response?.data?.message || "Something went wrong with your registration";
+            error.value = err.response?.data?.message || "Something went wrong with your login";
             throw err;
         }
     }
@@ -40,6 +41,12 @@
         } catch (error){
             console.error('Account could not be found:', error);
         }
+    }
+
+    const logout = () => {
+        localStorage.removeItem('user');
+        localStorage.removeItem('token');
+        router.push('/');
     }
 
 </script>

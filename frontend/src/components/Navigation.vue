@@ -1,37 +1,61 @@
 <script setup>
-import { ref } from 'vue';
+import { ref, watch } from 'vue';
+import { useRoute, useRouter } from 'vue-router';
 
-    const props = defineProps({
-        hasSearched: Boolean
-    })
 
-    const emit = defineEmits(['searched'])
-    const book = ref(null)
-    const loading = ref(false)
-    const searchTitle = ref('')
+const route = useRoute();
+const router = useRouter();
+
+const emit = defineEmits(['searched']);
+
+    const book = ref(null);
+    const loading = ref(false);
+    const searchTitle = ref('');
+
+watch(
+    () => route.path,
+    () => {
+        searchTitle.value = '';
+    }
+);
 
     async function fetchData(){
-        if(!searchTitle.value.trim()) return
+        if(!searchTitle.value.trim()) return;
 
        
         try{
-            loading.value = true
+            loading.value = true;
+            book.value = null;
 
-            const response = await fetch(`https://openlibrary.org/search.json?q=${encodeURIComponent(searchTitle.value)}&fields=key,title,author_name,cover_i,first_publish_year,edition_count,description&limit=1`)
+            localStorage.removeItem("searched-book");
+            localStorage.removeItem("rate-book");
+
+
+            const response = await fetch(
+                `https://openlibrary.org/search.json?q=${encodeURIComponent(searchTitle.value)}&fields=key,title,author_name,cover_i,first_publish_year,edition_count,description&limit=1`
+            );
             
             if(!response.ok){
                 throw new Error("Could not fetch resource");
             }
         
-            const data = await response.json()
+            const data = await response.json();
 
-            if(data.docs.length == 0)
-            {
-                book.value = null
-                return
+            if(data.docs.length === 0) return;
+            
+            book.value = data.docs[0];
+
+            localStorage.setItem("searched-book", 
+            JSON.stringify(book.value));
+
+            searchTitle.value= '';
+
+            if(route.path === '/SearchResults'){
+                window.location.reload();
             }
-
-            book.value = data.docs[0]
+            else{
+                await router.push('/SearchResults');
+            }
 
             emit('searched')
             
@@ -51,7 +75,7 @@ import { ref } from 'vue';
 
         <div class="brand">
             <img src="/src/assets/book-logo.svg" class="book-logo" alt="Book logo">
-            <RouterLink to="/Dashboard" class="dashboard-link">
+            <RouterLink to="/" class="dashboard-link">
                 <h3 class="brand-name">On the Shelf</h3>
             </RouterLink>
             
@@ -59,9 +83,13 @@ import { ref } from 'vue';
 
         <div class="nav-right">
 
+            <RouterLink to="/Rate" class="links">
+                Rate a book
+            </RouterLink>
             <RouterLink to="/UserAccount" class="links">
                 User
             </RouterLink>
+
 
             <form @submit.prevent="fetchData">
                 <div class="search-container">
@@ -81,29 +109,11 @@ import { ref } from 'vue';
 
     </nav>
 
-    <div id="container">
-        <p v-if="loading">Searching</p>
-
-        <div v-if="!loading && book" class="search-result">
-            <div :key="book.key">
-                <img
-                    v-if="book.cover_i"
-                    class="search-image"
-                    :src="`https://covers.openlibrary.org/b/id/${book.cover_i}-M.jpg`"
-                    :alt="book.title"
-                />
-
-                <h2>Title: {{ book.title }}</h2>
-                <p>Author: {{ book.author_name }}</p>
-                <p>Publish year: {{ book.first_publish_year || "Unknown" }}</p>
-                <p>Description: {{ book.description || "Unknown" }}</p>
-            </div>
-        </div>
-
-        <p v-if="props.hasSearched && !loading && !book">
-            No book found
-        </p>
+    <div v-if="loading" class="loading-message">
+        <div class="spin"></div>
+        <p>Searching for your book...</p>
     </div>
+
 </template>
 
 <style scoped>
@@ -149,6 +159,7 @@ import { ref } from 'vue';
     color: var(--button-color);
     text-decoration: none;
     font-weight: bold;
+    font-size: 18px;
 }
 
 .links:hover {
@@ -190,6 +201,15 @@ import { ref } from 'vue';
 
 .dashboard-link{
     text-decoration: none;
+}
+
+.loading-message{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    color: var(--text-color);
+    margin: 20px;
 }
 
 </style>
