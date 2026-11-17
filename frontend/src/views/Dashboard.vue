@@ -10,7 +10,7 @@ import Books from '../components/Books.vue'
     <main>
         <Navigation />
         <hr>
-        <h1 style="color: var(--header-color)">All Books</h1>
+        <h4 style="color: var(--header-color)">Most Popular Books</h4>
         <Books />        
     </main>
 
@@ -19,18 +19,19 @@ import Books from '../components/Books.vue'
 <style scoped>
 
     main {
-        background-color: #F5F0E6;
+        background-color: var(--background-color);
         min-height: 100vh;
     }
 
-    h1{
+    h4{
         background-color: var(--background-color);
         margin:10px;
+        font-size:24px;
     }
 
     @media (max-width: 600px){
-    h1{
-        font-size:28px;
+    h4{
+        font-size:20px;
     }
 }
 </style>
