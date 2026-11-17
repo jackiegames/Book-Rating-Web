@@ -167,6 +167,7 @@ async function getRatings() {
         color: var(--header-color);
     }
     h3{
+        margin-bottom: 20px;
         text-decoration: underline;
     }
 

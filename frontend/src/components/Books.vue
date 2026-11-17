@@ -9,7 +9,7 @@ const loading = ref(true)
         loading.value = true;
 
         const response = await fetch(
-            'https://openlibrary.org/trending/weekly.json?limit=12'
+            'https://openlibrary.org/trending/weekly.json?limit=20'
         );
 
         if(!response.ok){
