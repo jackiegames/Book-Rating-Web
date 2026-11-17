@@ -1,4 +1,4 @@
-On the Shelf
+📚On the Shelf
 
 On the Shelf is a book rating and review application that allows users to discover books, rate their reads and keep track of their reviews in one place.
 
@@ -16,7 +16,7 @@ Personal Account: View account information and previously submitted book ratings
 User Reviews: Each user can only retrieve their own ratings.
 Logout: Log out and clear locally stored authentication information.
 
-🛠️ Technologies Used:
+Technologies Used:
 Frontend:
 Vue.js
 JavaScript
