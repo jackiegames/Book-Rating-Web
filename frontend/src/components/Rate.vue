@@ -13,6 +13,7 @@
     const review = ref('');
     const error = ref('');
     const message = ref('');
+    const read = ref(null);
 
     function loadBook(){
         const rateBook = localStorage.getItem("rate-book");
@@ -52,7 +53,8 @@
                     review: review.value,
                     bookCover: rateBook.cover_i ? 
                         `https://covers.openlibrary.org/b/id/${rateBook.cover_i}-M.jpg`
-                        : null
+                        : null,
+                    read: read.value
                 }
 
                 console.log('Sending rating:', newRating);
@@ -71,6 +73,7 @@
 
             rating.value = '';
             review.value = '';
+            read.value = null;
             router.push('/UserAccount');
                 
         } catch (err){
@@ -134,6 +137,30 @@
                             </textarea>
 
                         </div>
+
+                        <div class="mb-3 d-flex align-items-center gap-4">
+
+                            <label for="rating" class="form-label">New Read:</label>
+                            <input 
+                                v-model="read" 
+                                required 
+                                type="radio" 
+                                id="new-read" 
+                                name="choice"
+                                :value="true"
+                                >
+
+                            <label for="rating" class="form-label">Re-read:</label>
+                            <input 
+                                v-model="read" 
+                                required 
+                                type="radio" 
+                                id="re-read" 
+                                name="choice"
+                                :value="false"
+                            >
+                        </div>
+
                         <div class="account-actions">
                             <button type ="submit" class="account-btn"> Submit</button>
                             

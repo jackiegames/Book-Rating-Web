@@ -120,6 +120,14 @@ async function getRatings() {
                         Review: {{ rating.review }}
                     </p>
 
+                    <p v-if="rating.read" class="text">
+                        New Read
+                    </p>
+
+                    <p v-else class="text">
+                        Re-read
+                    </p>
+
                 </div>
             </template>
 
@@ -157,6 +165,9 @@ async function getRatings() {
 
     h1, h3, .title{
         color: var(--header-color);
+    }
+    h3{
+        text-decoration: underline;
     }
 
     .text{
