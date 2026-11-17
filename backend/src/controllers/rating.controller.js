@@ -3,9 +3,9 @@ import { Rating } from "../models/rating.model.js";
 // Create a rating
 const createRating = async (req, res) => {
     try{
-        const { bookTitle, rating, review, bookCover } = req.body;
+        const { bookTitle, rating, review, bookCover, read } = req.body;
 
-        if( !bookTitle || rating == null ){
+        if( !bookTitle || rating == null || typeof read !== 'boolean' ){
             return res.status(400).json({
                 message: "Book title and rating are required"
             });
@@ -16,7 +16,8 @@ const createRating = async (req, res) => {
             bookTitle, 
             rating: Number(rating),
             review,
-            bookCover
+            bookCover,
+            read
         });
         res.status(201).json({
             message: "Review created successfully", 

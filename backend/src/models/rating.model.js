@@ -25,7 +25,12 @@ const ratingSchema = new Schema(
         },
 
         bookCover: {
-            type: String,
+            type: String
+        },
+
+        read:{
+            type: Boolean,
+            required: true
         }
     },
     {
